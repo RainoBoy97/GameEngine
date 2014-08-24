@@ -10,7 +10,7 @@ import java.util.List;
 public final class CounterManager {
 
     // List of all active counters
-    private final List<CounterItem> counters;
+    private final List<GameCounter> counters;
 
     public CounterManager() {
         this.counters = Lists.newArrayList();
@@ -24,8 +24,8 @@ public final class CounterManager {
      * @param operand the amount to add/subtract
      * @param limit   the limit it should stop at
      */
-    public void start(CounterContext counter, int count, int operand, int limit) {
-        counters.add(new CounterItem(this, counter).start(count, operand, limit));
+    public void start(GameCounter counter, int count, int operand, int limit) {
+        counters.add(counter.start(count, operand, limit));
     }
 
     /**
@@ -35,7 +35,7 @@ public final class CounterManager {
      * @param count   the count to start at
      * @param operand the amount to add/subtract
      */
-    public void start(CounterContext counter, int count, int operand) {
+    public void start(GameCounter counter, int count, int operand) {
         this.start(counter, count, operand, 0);
     }
 
@@ -45,7 +45,7 @@ public final class CounterManager {
      * @param counter the counter to run
      * @param count   the count to start at
      */
-    public void start(CounterContext counter, int count) {
+    public void start(GameCounter counter, int count) {
         this.start(counter, count, -1);
     }
 
@@ -53,7 +53,7 @@ public final class CounterManager {
      * Cancels all the active counters
      */
     public void cancelAll() {
-        for (CounterItem cr : this.counters)
+        for (GameCounter cr : this.counters)
             cr.stop();
         this.counters.clear();
     }
@@ -64,7 +64,7 @@ public final class CounterManager {
      * @param counterItem the counter to remove
      * @return if the counter was removed or not
      */
-    public boolean remove(CounterItem counterItem) {
+    public boolean remove(GameCounter counterItem) {
         return counters.remove(counterItem);
     }
 

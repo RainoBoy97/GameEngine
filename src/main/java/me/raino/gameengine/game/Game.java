@@ -4,10 +4,6 @@ import me.raino.gameengine.counters.CounterManager;
 
 public abstract class Game {
 
-    private CounterManager counterManager;
-
-    public Game() {
-        this.counterManager = new CounterManager();
-    }
+    private CounterManager counterManager = new CounterManager();
 
 }

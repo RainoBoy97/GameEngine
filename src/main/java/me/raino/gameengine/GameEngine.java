@@ -1,14 +1,13 @@
 package me.raino.gameengine;
 
+import me.raino.gameengine.game.GameManager;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-/**
- * Main Bukkit class
- */
 public class GameEngine extends JavaPlugin {
 
-    // Singleton instance of GameEngine.java
     private static GameEngine instance;
+    private static GameManager gameManager;
 
     @Override
     public void onDisable() {
@@ -20,13 +19,12 @@ public class GameEngine extends JavaPlugin {
         GameEngine.instance = this;
     }
 
-    /**
-     * Gets the current instance of GameEngine
-     *
-     * @return the GameEngine instance
-     */
     public static GameEngine get() {
         return GameEngine.instance;
+    }
+
+    public static GameManager getGameManager() {
+        return GameEngine.gameManager;
     }
 
 }

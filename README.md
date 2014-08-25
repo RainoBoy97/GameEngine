@@ -19,7 +19,7 @@ We use maven to handle our dependencies.
 Coding Conventions
 ------------------
 1. We generally follow the Sun/Oracle coding standards.
-2. No 80 column limit or 'weird' midstatement newlines.
+2. No 80 column limit or 'weird' midstatement newlines. :bangbang:
 3. No CRLF line endings, LF only, put your gits 'core.autocrlf' on 'true'.
 4. No tabs; use 4 spaces instead.
 5. No trailing whitespaces.

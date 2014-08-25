@@ -44,8 +44,7 @@ public abstract class GameCounter extends BukkitRunnable {
     public void run() {
         if ((this.operand > 0 && this.count < this.limit) || (this.operand < 0 && this.count > this.limit)) {
             this.onTick(this.count);
-        }
-        else {
+        } else {
             this.onEnd();
             this.stop();
         }

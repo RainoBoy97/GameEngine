@@ -19,10 +19,15 @@ public final class GameManager {
         this.gameClasses = Maps.newHashMap();
     }
 
-    public void registerGame(Game game) {
-        Class<? extends Game> gameClass = game.getClass();
+    public void registerGame(Class<? extends Game> gameClass) {
         GameMeta meta = gameClass.getAnnotation(GameMeta.class);
         Preconditions.checkNotNull(meta, gameClass.getSimpleName() + " must have GameMeta annotation");
+        Game game = null;
+        try {
+            game = gameClass.getConstructor(GameMeta.class).newInstance(meta);
+        } catch(Exception exception) {
+
+        }
         this.games.add(game);
         this.gameMeta.put(meta, game);
         this.gameClasses.put(gameClass, game);

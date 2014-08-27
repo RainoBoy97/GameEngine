@@ -2,17 +2,20 @@ package me.raino.gameengine.game;
 
 import me.raino.gameengine.counters.CounterManager;
 import me.raino.gameengine.game.logger.GameLogger;
+import me.raino.gameengine.map.MapManager;
 
 public abstract class Game {
 
     private GameMeta meta;
     private GameLogger logger;
 
+    private MapManager mapManager;
     private CounterManager counterManager;
 
     protected Game(GameMeta meta) {
         this.meta = meta;
         this.logger = new GameLogger(meta);
+        this.mapManager = new MapManager();
         this.counterManager = new CounterManager();
     }
 
@@ -22,6 +25,10 @@ public abstract class Game {
 
     public GameLogger getLogger() {
         return this.logger;
+    }
+
+    public MapManager getMapManager() {
+        return this.mapManager;
     }
 
     public CounterManager getCounterManager() {

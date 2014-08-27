@@ -6,6 +6,7 @@ import java.util.Set;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import me.raino.gameengine.Log;
 
 public final class GameManager {
 
@@ -25,8 +26,8 @@ public final class GameManager {
         Game game = null;
         try {
             game = gameClass.getConstructor(GameMeta.class).newInstance(meta);
-        } catch(Exception exception) {
-
+        } catch(Exception e) {
+            Log.exception(e);
         }
         this.games.add(game);
         this.gameMeta.put(meta, game);

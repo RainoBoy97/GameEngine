@@ -7,6 +7,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class GameEngine extends JavaPlugin {
 
     private static GameEngine instance;
+
+    private static Log log;
+
     private static GameManager gameManager;
 
     @Override

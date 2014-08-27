@@ -8,13 +8,13 @@ Goal
 
 To be a simple yet flexible and customizable engine to provide a unique experience to the user.
 
-Compilation
------------
+Features
+--------
 
-We use maven to handle our dependencies.
-
-* Install [Maven 3](http://maven.apache.org/download.html)
-* Check out this repo and: `mvn clean install`
+- Concurrent games
+- Multiple maps
+- Advanced API allowing full control of games
+- Ease of use
 
 Coding Conventions
 ------------------
@@ -23,10 +23,16 @@ Coding Conventions
 3. No CRLF line endings, LF only, put your gits 'core.autocrlf' on 'true'.
 4. No tabs; use 4 spaces instead.
 5. No trailing whitespaces.
-6. Annotate most methods, exceptions for 100% self explanatory code
-7. Interfaces should always be annotated
-8. @Nullable or Optional should be used for nullable class fields and method params
-9. Use * for importing 5 or more classes from a package
+6. @Nullable or Optional should be used for nullable class fields and method params
+7. Use * for importing 5 or more classes from a package
+
+Compilation
+-----------
+
+We use maven to handle our dependencies.
+
+* Install [Maven 3](http://maven.apache.org/download.html)
+* Check out this repo and: `mvn clean install`
 
 Git
 ------

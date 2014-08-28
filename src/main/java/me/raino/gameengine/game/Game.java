@@ -18,7 +18,7 @@ public abstract class Game {
     protected Game(GameMeta meta) {
         this.meta = meta;
         this.logger = new GameLogger(meta);
-        this.mapManager = new MapManager(new File(GameEngine.get().getDataFolder() + File.separator + meta.name()));
+        this.mapManager = new MapManager(new File(GameEngine.get().getDataFolder() + File.separator + meta.getName() + File.separator + "maps"));
         this.counterManager = new CounterManager();
     }
 

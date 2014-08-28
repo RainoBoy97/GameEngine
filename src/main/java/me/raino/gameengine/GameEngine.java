@@ -18,6 +18,7 @@ public class GameEngine extends JavaPlugin {
     @Override
     public void onEnable() {
         GameEngine.instance = this;
+        GameEngine.gameManager = new GameManager();
     }
 
     public static GameEngine get() {

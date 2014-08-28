@@ -1,37 +1,40 @@
 package me.raino.gameengine.game;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.jar.JarFile;
 
-import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
+import me.raino.gameengine.Log;
+
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import me.raino.gameengine.Log;
 
 public final class GameManager {
 
-    private Set<Game> games;
+    private List<Game> games;
     private Map<GameMeta, Game> gameMeta;
     private Map<Class<? extends Game>, Game> gameClasses;
 
     public GameManager() {
-        this.games = Sets.newHashSet();
+        this.games = Lists.newArrayList();
         this.gameMeta = Maps.newHashMap();
         this.gameClasses = Maps.newHashMap();
     }
 
-    public void registerGame(Class<? extends Game> gameClass) {
-        GameMeta meta = gameClass.getAnnotation(GameMeta.class);
-        Preconditions.checkNotNull(meta, gameClass.getSimpleName() + " must have GameMeta annotation");
-        Game game = null;
-        try {
-            game = gameClass.getConstructor(GameMeta.class).newInstance(meta);
-        } catch(Exception e) {
-            Log.exception(e);
-        }
+    public void loadGames(File folder) {
+        GameLoader loader = new GameLoader();
+        for (Game game : loader.loadGames(folder))
+            registerGame(game);
+    }
+
+    public void registerGame(Game game) {
         this.games.add(game);
-        this.gameMeta.put(meta, game);
-        this.gameClasses.put(gameClass, game);
+        this.gameMeta.put(game.getMeta(), game);
+        this.gameClasses.put(game.getClass(), game);
     }
 
 }

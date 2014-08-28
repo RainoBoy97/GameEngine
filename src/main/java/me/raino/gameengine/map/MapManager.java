@@ -1,14 +1,11 @@
 package me.raino.gameengine.map;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.io.FilenameFilter;
-import java.util.List;
 import java.util.Set;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import org.apache.commons.io.FileUtils;
+
+import com.google.common.collect.Sets;
 
 public final class MapManager {
 
@@ -21,14 +18,11 @@ public final class MapManager {
     }
 
     private void clean(File directory) {
-        FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return !(name.equalsIgnoreCase("region") || name.equalsIgnoreCase("data") || name.equalsIgnoreCase("level.dat"));
-            }
-        };
-        for (File f : directory.listFiles(filter))
-            FileUtils.deleteQuietly(f);
+        for (File f : directory.listFiles()) {
+            String name = f.getName();
+            if (!(name.equalsIgnoreCase("region") || name.equalsIgnoreCase("data") || name.equalsIgnoreCase("level.dat")))
+                FileUtils.deleteQuietly(f);
+        }
     }
 
     public File getDirectory() {
@@ -38,5 +32,5 @@ public final class MapManager {
     public Set<GameMap> getMaps() {
         return this.maps;
     }
-    
+
 }

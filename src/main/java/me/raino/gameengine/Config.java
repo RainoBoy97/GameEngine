@@ -21,4 +21,12 @@ public final class Config {
 
     }
 
+    public static class Match {
+
+        private static final String SECTION = "match.";
+
+        public static final String PREFIX = config.getString(SECTION + "prefix", "match-");
+
+    }
+
 }

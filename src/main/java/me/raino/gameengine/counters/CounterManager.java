@@ -24,14 +24,29 @@ public final class CounterManager {
         this.start(counter, count, -1);
     }
 
-    public void cancelAll() {
-        for (GameCounter cr : this.counters)
-            cr.stop();
-        this.counters.clear();
+    public int cancel(Class<? extends GameCounter> counter) {
+        int result = 0;
+        for (GameCounter cr : this.counters) {
+            if (cr.getClass().isAssignableFrom(counter)) {
+                cr.cancel();
+                result++;
+            }
+        }
+        return result;
     }
 
-    public boolean remove(GameCounter counterItem) {
-        return counters.remove(counterItem);
+    public int cancelAll() {
+        int result = 0;
+        for (GameCounter cr : this.counters) {
+            cr.stop();
+            result++;
+        }
+        this.counters.clear();
+        return result;
+    }
+
+    public boolean remove(GameCounter counter) {
+        return counters.remove(counter);
     }
 
 }

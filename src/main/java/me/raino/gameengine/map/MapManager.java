@@ -3,9 +3,8 @@ package me.raino.gameengine.map;
 import java.io.File;
 import java.util.Set;
 
-import org.apache.commons.io.FileUtils;
-
 import com.google.common.collect.Sets;
+import net.minecraft.util.org.apache.commons.io.FileUtils;
 
 public final class MapManager {
 

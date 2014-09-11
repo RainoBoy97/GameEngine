@@ -24,14 +24,6 @@ public abstract class GameCounter extends BukkitRunnable {
         return this;
     }
 
-    public GameCounter start(int count, int operand) {
-        return this.start(count, operand, 0);
-    }
-
-    public GameCounter start(int count) {
-        return this.start(count, -1);
-    }
-
     public void cancel() {
         this.stop();
         this.onCancel();

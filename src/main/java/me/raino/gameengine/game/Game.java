@@ -1,11 +1,11 @@
 package me.raino.gameengine.game;
 
+import java.io.File;
+
 import me.raino.gameengine.GameEngine;
 import me.raino.gameengine.counters.CounterManager;
 import me.raino.gameengine.game.logger.GameLogger;
 import me.raino.gameengine.map.MapManager;
-
-import java.io.File;
 
 public abstract class Game {
 
@@ -15,10 +15,10 @@ public abstract class Game {
     private MapManager mapManager;
     private CounterManager counterManager;
 
-    protected Game(GameMeta meta) {
+    public Game(GameMeta meta) {
         this.meta = meta;
         this.logger = new GameLogger(meta);
-        this.mapManager = new MapManager(new File(GameEngine.get().getDataFolder() + File.separator + meta.getName() + File.separator + "maps"));
+        this.mapManager = new MapManager(new File(GameEngine.get().getDataFolder() + File.separator + meta.name() + File.separator + "maps"));
         this.counterManager = new CounterManager();
     }
 
@@ -38,8 +38,8 @@ public abstract class Game {
         return this.counterManager;
     }
 
-    public abstract void enable();
+    public abstract void onEnable();
 
-    public abstract void disable();
+    public abstract void onDisable();
 
 }

@@ -1,17 +1,14 @@
 package me.raino.gameengine.game;
 
-import java.io.File;
-import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.jar.JarFile;
 
-import com.google.common.collect.Lists;
 import me.raino.gameengine.Log;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 public final class GameManager {
 
@@ -25,16 +22,21 @@ public final class GameManager {
         this.gameClasses = Maps.newHashMap();
     }
 
-    public void loadGames(File folder) {
-        GameLoader loader = new GameLoader();
-        for (Game game : loader.loadGames(folder))
-            registerGame(game);
-    }
-
-    public void registerGame(Game game) {
+    public void registerGame(Class<? extends Game> gameClass) {
+        GameMeta gameMeta = gameClass.getAnnotation(GameMeta.class);
+        Preconditions.checkNotNull(gameMeta, "Game must have GameMeta annotation");
+        Game game = null;
+        try {
+            game = gameClass.getConstructor(GameMeta.class).newInstance(gameMeta);
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            Log.exception(e);
+        }
         this.games.add(game);
-        this.gameMeta.put(game.getMeta(), game);
-        this.gameClasses.put(game.getClass(), game);
+        this.gameMeta.put(gameMeta, game);
+        this.gameClasses.put(gameClass, game);
     }
 
+    public List<Game> getGames() {
+        return this.games;
+    }
 }

@@ -6,28 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.List;
 
-public final class GameMeta {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface GameMeta {
 
-    private final String main;
-    private final String name;
-    private final String description;
+    public String name();
 
-    public GameMeta(String main, String name, String description) {
-        this.main = main;
-        this.name = name;
-        this.description = description;
-    }
-
-    public String getMain() {
-        return this.main;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
+    public String description();
 
 }

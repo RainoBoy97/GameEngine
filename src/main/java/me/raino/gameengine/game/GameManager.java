@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.ImmutableList;
 import me.raino.gameengine.Log;
 
 import com.google.common.base.Preconditions;
@@ -37,6 +38,6 @@ public final class GameManager {
     }
 
     public List<Game> getGames() {
-        return this.games;
+        return ImmutableList.copyOf(this.games);
     }
 }

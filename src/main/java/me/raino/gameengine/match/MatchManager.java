@@ -1,16 +1,18 @@
 package me.raino.gameengine.match;
 
-import com.google.common.collect.Maps;
+import java.io.File;
+import java.util.Map;
+
 import me.raino.gameengine.Config;
 import me.raino.gameengine.game.Game;
 import me.raino.gameengine.map.GameMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 
-import java.io.File;
-import java.util.Map;
+import com.google.common.collect.Maps;
 
 public final class MatchManager {
 
@@ -18,15 +20,17 @@ public final class MatchManager {
 
     private Map<World, Match> matches;
 
-    protected MatchManager() {
+    public MatchManager() {
         this.matches = Maps.newConcurrentMap();
     }
 
     public Match newMatch(Game game, GameMap map) {
-        String name = Config.Match.PREFIX + "id here";
+        String name = Config.Match.PREFIX + ++matchId;
         File dist = new File(Bukkit.getWorldContainer(), name);
+        
         World world = Bukkit.createWorld(new WorldCreator(name).type(WorldType.FLAT));
-        Match match = new Match(matchId, game, map, null);
+        Match match = new Match(matchId, game, map, world);
+        this.matches.put(world, match);
         return match;
     }
 
